@@ -1,0 +1,167 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"> </script>
+	<script type="text/javascript" src="js/jQueryRotate.2.2.js"></script>
+	<script type="text/javascript" src="velocity.js"></script>
+	
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="level.js"></script>
+	<script type="text/javascript" src="matamoscas.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	
+	<script type="text/javascript" src="mediaLowLatency.js"></script>
+	<script src="js/ion.sound.js"></script>
+	
+	<link href="styles.css" rel="stylesheet" media="screen" type="text/css"> 
+	<link href="number_counter.css" rel="stylesheet" media="screen" type="text/css"> 
+	<script type="text/javascript">
+		app.initialize();
+		document.addEventListener('deviceready', onDeviceReady, false);
+		function getPhoneGapPath() {
+			return "";
+			var path= window.location.href;
+			if (window.location.href.indexOf( 'http://' ) == -1) //Es una app ya exportada!!!
+			{
+				path = "/android_asset/www/"
+			}
+			return path;
+		};
+		
+		window.onerror = function(msg, url, linenumber) {
+			alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+			return true;
+		}
+	
+	  
+		function onDeviceReady(){	
+			document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+			centerY = window.innerHeight/2;
+			centerX = window.innerWidth/2;			
+			//set absoulte positioning on element
+			$("#mira").css("position", "absolute");
+			// place the element
+			var miraWidth = parseInt($("#mira").css("width"));
+			var miraHeight = parseInt($("#mira").css("height"));
+			$("#mira").css({ top: 0, left: centerX - miraWidth/2});
+			c = new Controller();
+			document.getElementById("buttonOutside").addEventListener('touchstart',buttonClicked);
+			$("#container").show();
+			setTimeout(function() {
+				$("#loading").hide();try {window.plugins.insomnia.keepAwake();} catch (err){} //Para que no rompa las pelotas en serve
+			}, 2000);
+			
+			setMiraArea();
+			//setInterval(c.moveMoscas,20);
+		}
+	
+		function setMiraArea(){
+			var miratop = parseInt($("#mira").css("height")) * 0.35;
+			var miraleft = parseInt($("#mira").css("width")) * 0.15;
+			$("#miraArea").css("top",miratop);
+			$("#miraArea").css("left",miraleft);
+		}
+		var miraClicked=false;
+		var redButtonClicked = false;
+		function setMiraAsDefault()
+		{
+			miraClicked=false;
+			document.getElementById("miraImg2").style.display = "none";
+			document.getElementById("miraImg").style.display = "block";
+		}
+		
+		function setButtonAsDefault(){
+			redButtonClicked = false;
+			$("#buttonInside").attr("src","red_button.png");
+			$("#buttonOutside").attr("src","red_button_pressed.png");
+		}
+		
+		function setMiraElectrified(){
+			document.getElementById("miraImg1").style.display = "none";
+			document.getElementById("miraImg2").style.display = "block";
+			setTimeout(setMiraAsDefault, 200);
+		}
+		function buttonClicked()
+		{
+			if (!miraClicked)
+			{
+				if (c.attempts>0)//Para no animar la lampara si no te quedan tiros
+				{
+					miraClicked=true;
+					document.getElementById("miraImg").style.display = "none";
+					document.getElementById("miraImg1").style.display = "block";
+					//$("#miraImg").attr("src","imagenes/lamp-1.png");
+					setTimeout(setMiraElectrified, 200);			
+				}					
+			}
+			if(!redButtonClicked){
+				redButtonClicked = true;
+				$("#buttonInside").attr("src","red_button_pressed.png");
+				$("#buttonOutside").attr("src","red_button_pressed.png");
+				setTimeout(setButtonAsDefault, 200);
+
+			}
+			c.checkIfKilled();
+		}
+	</script>
+</head>
+<body>
+<div id="loading" style="z-index:100">
+		<img src="menu_cargando.png" style="width:100%; height:100%" />
+	</div>
+<img src="imagenes/cables_bat5.png" id="cables0" style="position:absolute; top:0px; left:0px; width:100%; height:100%;" />
+<img src="imagenes/bat-0.png" id="bat-0" class="bateria" />
+<img src="imagenes/bat-1.png" id="bat-1" class="bateria" />
+<img src="imagenes/bat-2.png" id="bat-2" class="bateria" />
+<img src="imagenes/bat-3.png" id="bat-3" class="bateria" />
+<img src="imagenes/bat-4.png" id="bat-4" class="bateria" />
+<img src="imagenes/bat-5.png" id="bat-5" class="bateria" />
+
+	<div id="container" >
+		
+		<div id="mira">
+			<img id="buttonInside" src="red_button.png" onclick="buttonClicked()" />
+			<img id="miraImg" class="miraImgStyle" src="imagenes/lamp-0.png"/>
+			<img id="miraImg1" class="miraImgStyle" src="imagenes/lamp-1.png" style="display:none"/>
+			<img id="miraImg2" class="miraImgStyle" src="imagenes/lamp-2.png" style="display:none"/>
+			<div id="miraArea"></div>
+		</div>
+		<img id="buttonOutside" src="red_button.png"  />
+		<div id="masterCounter">
+			<img id="counterBackground" src="imagenes/contador1.png"/>
+			<div id="counterContainer">
+				<div class="counter contadorHighscore">
+					<span id="digithigh2" class="digit-0">0</span>
+					<span id="digithigh1" class="digit-0">0</span>
+					<span id="digithigh0" class="digit-0">1</span>
+				</div>
+				<div class="counter contador">
+					<span id="digit2" class="digit-0">0</span>
+					<span id="digit1" class="digit-0">0</span>
+					<span id="digit0" class="digit-0">1</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="buttonContainer">
+		<img id="uniqueButton" src="jugar.png"  onclick="c.initialize()"></button>
+	</div>
+	
+	<script type="text/javascript" src="js/move.js"></script>
+	<!--<script type="text/javascript">
+		var hola=10;
+		function movete(){
+			for (var i=1; i<=20;i++)
+			{
+				move('.square').to(hola,hola).end();
+			}
+			
+			hola+=20;
+		}
+		setInterval(movete,200);
+		  
+	</script>-->
+
+</body>
+
+</html>

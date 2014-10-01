@@ -1,0 +1,78 @@
+<html>
+<head>
+
+	<script type="text/javascript" src="jquery-2.1.1.min.js"> </script>
+	<script type="text/javascript" src="rwdImageMaps.js"> </script>
+	<link href="menuStyles.css" rel="stylesheet" media="screen" type="text/css"> 
+	<script type="text/javascript">
+		/*$(document).ready(function(){	
+			document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);			 
+		});
+		function findSizes(el, src) {
+			if (!el || !src) {
+				return false;
+			}
+			else {
+				var wGCS = window.getComputedStyle,
+					pI = parseInt,
+					dimensions = {};
+				dimensions.actualWidth = pI(wGCS(el, null).width.replace('px', ''), 10);
+				var newImg = document.createElement('img');
+				newImg.src = src;
+				newImg.style.position = 'absolute';
+				newImg.style.left = '-10000px';
+				document.body.appendChild(newImg);
+				dimensions.originalWidth = newImg.width;
+				document.body.removeChild(newImg);
+				return dimensions;
+			}
+		}
+
+		function remap(imgElem) {
+			if (!imgElem) {
+				return false;
+			}
+			else {
+				var mapName = imgElem
+					.getAttribute('usemap')
+					.substring(1),
+					map = document.getElementsByName(mapName)[0],
+					areas = map.getElementsByTagName('area'),
+					imgSrc = imgElem.src,
+					sizes = findSizes(imgElem, imgSrc),
+					currentWidth = sizes.actualWidth,
+					originalWidth = sizes.originalWidth,
+					multiplier = currentWidth / originalWidth,
+					newCoords;
+
+				for (var i = 0, len = areas.length; i < len; i++) {
+					newCoords = areas[i]
+						.getAttribute('coords')
+						.replace(/(\d+)/g,function(a){
+							return Math.round(a * multiplier);
+						});
+					areas[i].setAttribute('coords',newCoords);
+				}
+			}
+		}
+
+		var imgElement = document.getElementsByTagName('img')[0];
+
+		remap(imgElement);*/
+	</script>	
+
+</head>
+<body>
+	<!--<img src="menu.png" id="background" usemap="#menumap"/>
+	<map name="menumap">
+	  <area shape="rect" style="border:1px solid red;" coords="219,492,455,585"  href="play.html">
+	  <area shape="rect" coords="215,638,454,726"  href="highscore.html">
+	  <area shape="rect" coords="200,800,465,887"  href="creditos.html">
+	</map>-->
+	<table>
+		<tr><img src="menuItem.png"/></td>
+	</table>
+
+</body>
+</div>
+</html>
