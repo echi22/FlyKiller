@@ -1,0 +1,198 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+
+	<body onload="load()" >
+		<canvas id="canvas" style="border:#000 solid 1px;">
+		</canvas>
+		<canvas id="canvas2" style="border:#000 solid 1px; display:none">
+		</canvas>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
+		<script src="levels.js"></script>	
+		<script type="text/javascript">
+		
+		
+		
+		
+		function load()
+		{
+			canvas.width = window.innerWidth *0.9;
+            canvas.height = window.innerHeight *0.95;
+			canvas2.width = window.innerWidth *0.9;
+            canvas2.height = window.innerHeight *0.95;
+			//dibujear lineas
+			create_path("canvas");
+			create_path("canvas2");
+			context.stroke();			
+			init();
+			
+		}	
+		//
+		window.addEventListener("orientationchange", orientationChange, true);
+		
+		function orientationChange(){
+			load();
+		}
+
+		started = false;
+		win = false;
+		level=1;
+		xmlDOM = $.parseXML(levels);
+		function create_path(canv){
+			
+			var canvas = document.getElementById(canv);
+			var ctx = canvas.getContext('2d');
+			ctx.shadowColor ="rgba(0,0,0,0)";
+            ctx.strokeStyle ="rgba(0,0,0,1)";
+            ctx.lineWidth = 1;
+            ctx.lineCap = "butt";
+            ctx.lineJoin = "miter";
+            ctx.beginPath();
+			if ((window.orientation==0) || (Math.  abs(window.orientation)==180))
+			{
+			//Portrait
+				document.getElementById("canvas").style.display="block";
+				eval($(xmlDOM).find('level[id="level'+level+'"]').find("code[name='pathCode']").text());
+			} else {
+			//Landscape
+				document.getElementById("canvas").style.display="none";
+				alert("solo se puede jugar en portrait");
+			}
+			ctx.closePath();							
+		}
+			
+		// get the canvas element and its context
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		
+		// create a drawer which tracks touch movements
+		var drawer = {
+		   isDrawing: false,
+		   touchstart: function(coors){
+			  context.beginPath();
+			  context.moveTo(coors.x, coors.y);
+			  this.isDrawing = true;
+		   },
+		   touchmove: function(coors){
+			  if (this.isDrawing) {
+				 context.lineTo(coors.x, coors.y);
+				 context.stroke();
+			  }
+		   },
+		   touchend: function(coors){
+			  if (this.isDrawing) {
+				 this.touchmove(coors);
+				 this.isDrawing = false;
+				 
+			  }
+		   }
+		};
+		
+		function draw_start(){
+			var canvas = document.getElementById("canvas2");
+			var ctx = canvas.getContext('2d');
+			ctx.beginPath();
+		eval($(xmlDOM).find('level[id="level'+level+'"]').find("code[name='startCode']").text());
+			ctx.closePath();
+		}
+		function check_start(){
+			var canvas2 = document.getElementById('canvas2');
+			var context2 = canvas2.getContext('2d');
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			var coors = {
+			  x: event.targetTouches[0].pageX,
+			  y: event.targetTouches[0].pageY
+		    };
+		    draw_start();
+		    if(context2.isPointInPath(coors.x,coors.y)){
+				started = true;
+			}
+		}
+		var xOff = 0;
+
+		function check_win(){
+			var canvas2 = document.getElementById('canvas2');
+			var context2 = canvas2.getContext('2d');
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			var coors = {
+			  x: event.targetTouches[0].pageX,
+			  y: event.targetTouches[0].pageY
+		    };
+		    draw_end();
+		    if(context2.isPointInPath(coors.x,coors.y)){
+				alert("Ganaste!!");
+				level = level +1;
+				win = true;				
+				init();
+				
+			}
+		}
+		function draw_end(){
+			var canvas = document.getElementById("canvas2");
+			var ctx = canvas.getContext('2d');
+			ctx.beginPath();
+			eval($(xmlDOM).find('level[id="level'+level+'"]').find("code[name='endCode']").text());
+			ctx.closePath();
+		}
+		// create a function to pass touch events and coordinates to drawer
+		function draw(event){				
+			if(started && !win && (event.type == "touchend")){
+					alert("Perdiste");
+					init();
+				}
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			var canvas2 = document.getElementById('canvas2');
+			var context2 = canvas2.getContext('2d');
+		   // get the touch coordinates
+		   var coors = {
+			  x: event.targetTouches[0].pageX,
+			  y: event.targetTouches[0].pageY
+		   };
+		   if(!started){
+			check_start(event);
+			}
+		   // pass the coordinates to the appropriate handler
+		   create_path("canvas2");
+		   if(started){
+			   if(context2.isPointInPath(coors.x,coors.y)){		   
+					drawer[event.type](coors);
+					check_win();
+			   }else{
+				   alert("perdiste");
+				   init();
+				}
+			}
+			
+		}
+		 
+		// attach the touchstart, touchmove, touchend event listeners.
+		canvas.addEventListener('touchstart',draw, false);
+		canvas.addEventListener('touchmove',draw, false);
+		canvas.addEventListener('touchend',draw, false);
+		
+		// prevent elastic scrolling
+		document.body.addEventListener('touchmove',function(event){
+		  event.preventDefault();
+		},false);	// end body:touchmove
+		
+		
+		function init(){
+			//dibujear lineas
+			canvas.width = canvas.width;
+			create_path("canvas");
+			create_path("canvas2");
+			win = false; 
+			started = false;
+			context.stroke();
+		}
+		
+
+
+	</script>
+</body></html>

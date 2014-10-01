@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<levels>
+
+
+	<level name="level1">
+		<startCode>
+		    ctx.moveTo(160,12);
+            ctx.lineTo(120,12);
+            ctx.lineTo(120,32);
+            ctx.lineTo(160,32);
+            ctx.lineTo(160,12);
+		</startCode>
+		
+		<pathCode>
+			ctx.moveTo(180,492);
+		   ctx.bezierCurveTo(170,457,150,387,140,352);
+		   ctx.bezierCurveTo(140,332,140,292,140,272);
+		   ctx.bezierCurveTo(120,242,80,182,60,152);
+		   ctx.bezierCurveTo(60,142,60,122,60,112);
+		   ctx.bezierCurveTo(65,107,75,97,80,92);
+		   ctx.bezierCurveTo(90,92,110,92,120,92);
+		   ctx.bezierCurveTo(125,92,135,92,140,92);
+		   ctx.bezierCurveTo(145,87,155,77,160,72);
+		   ctx.bezierCurveTo(160,62,160,42,160,32);
+		   ctx.bezierCurveTo(160,27,160,17,160,12);
+		   ctx.bezierCurveTo(150,12,130,12,120,12);
+		   ctx.bezierCurveTo(120,22,120,42,120,52);
+		   ctx.bezierCurveTo(115,57,105,67,100,72);
+		   ctx.bezierCurveTo(85,72,55,72,40,72);
+		   ctx.bezierCurveTo(35,77,25,87,20,92);
+		   ctx.bezierCurveTo(20,112,20,152,20,172);
+		   ctx.bezierCurveTo(40,202,80,262,100,292);
+		   ctx.bezierCurveTo(95,302,85,322,80,332);
+		   ctx.bezierCurveTo(95,372,125,452,140,492);
+		   ctx.bezierCurveTo(150,492,170,492,180,492);
+		</pathCode>
+		
+		<endCode>
+		    ctx.moveTo(139,491);
+            ctx.bezierCurveTo(150,491,171,492,181,492);
+            ctx.bezierCurveTo(179,488,176,479,174,474);
+            ctx.bezierCurveTo(164,474,143,474,133,474);
+            ctx.bezierCurveTo(135,479,138,488,139,492);
+		</endCode>
+	</level>
+	
+
+'	<level id="level2">'+
+'		<code name="startCode">'+
+'			ctx.moveTo(420,432);'+
+'		   ctx.lineTo(380,432);'+
+'		   ctx.lineTo(380,412);'+
+'		   ctx.lineTo(420,412);'+
+'		   ctx.lineTo(420,432);'+
+		</code>'+
+		
+'		<code name="pathCode">'+
+'			ctx.moveTo(300,172);'+
+'		   ctx.bezierCurveTo(310,172,330,172,340,172);'+
+'		   ctx.bezierCurveTo(340,182,340,202,340,212);'+
+'		   ctx.bezierCurveTo(330,212,310,212,300,212);'+
+'		   ctx.bezierCurveTo(290,212,270,212,260,212);'+
+'		   ctx.bezierCurveTo(260,192,260,152,260,132);'+
+'		   ctx.bezierCurveTo(260,122,260,102,260,92);'+
+'		   ctx.bezierCurveTo(260,82,260,62,260,52);'+
+'		   ctx.bezierCurveTo(270,52,290,52,300,52);'+
+'		   ctx.bezierCurveTo(310,52,330,52,340,52);'+
+'		   ctx.bezierCurveTo(350,52,370,52,380,52);'+
+'		   ctx.bezierCurveTo(380,67,380,97,380,112);'+
+'		   ctx.bezierCurveTo(400,112,440,112,460,112);'+
+'		   ctx.bezierCurveTo(460,122,460,142,460,152);'+
+'		   ctx.bezierCurveTo(460,162,460,182,460,192);'+
+'		   ctx.bezierCurveTo(450,192,430,192,420,192);'+
+'		   ctx.bezierCurveTo(420,202,420,222,420,232);'+
+'		   ctx.bezierCurveTo(415,232,405,232,400,232);'+
+'		   ctx.bezierCurveTo(400,242,400,262,400,272);'+
+'		   ctx.bezierCurveTo(395,272,385,272,380,272);'+
+'		   ctx.bezierCurveTo(380,282,380,302,380,312);'+
+'		   ctx.bezierCurveTo(370,312,350,312,340,312);'+
+'		   ctx.bezierCurveTo(340,322,340,342,340,352);'+
+'		   ctx.bezierCurveTo(350,352,370,352,380,352);'+
+'		   ctx.bezierCurveTo(390,352,410,352,420,352);'+
+'		   ctx.bezierCurveTo(420,362,420,382,420,392);'+
+'		   ctx.bezierCurveTo(420,402,420,422,420,432);'+
+'		   ctx.bezierCurveTo(410,432,390,432,380,432);'+
+'		   ctx.bezierCurveTo(380,422,380,402,380,392);'+
+'		   ctx.bezierCurveTo(360,392,320,392,300,392);'+
+'		   ctx.bezierCurveTo(300,362,300,302,300,272);'+
+'		   ctx.bezierCurveTo(310,272,330,272,340,272);'+
+'		   ctx.bezierCurveTo(340,262,340,242,340,232);'+
+'		   ctx.bezierCurveTo(345,232,355,232,360,232);'+
+'		   ctx.bezierCurveTo(365,227,375,217,380,212);'+
+'		   ctx.bezierCurveTo(380,202,380,182,380,172);'+
+'		   ctx.bezierCurveTo(390,167,410,157,420,152);'+
+'		   ctx.bezierCurveTo(410,152,390,152,380,152);'+
+'		   ctx.bezierCurveTo(370,142,350,122,340,112);'+
+'		   ctx.bezierCurveTo(340,107,340,97,340,92);'+
+'		   ctx.bezierCurveTo(330,92,310,92,300,92);'+
+'		   ctx.bezierCurveTo(300,102,300,122,300,132);'+
+'		   ctx.bezierCurveTo(295,142,285,162,280,172);'+
+'		   ctx.bezierCurveTo(285,172,295,172,300,172);'+
+'		</code>'+
+	
+'		<code name="endCode">'+
+'        	ctx.moveTo(320,172);'+
+'		   ctx.lineTo(340,172);'+
+'		   ctx.lineTo(340,212);'+
+'		   ctx.lineTo(320,212);'+
+'		   ctx.lineTo(320,172);'+
+'		</code>'+
+'	</level>'+
+		<pathCode>
+				
+		</pathCode>
+		
+		<endCode>
+		</endCode>
+	</level>
+	
+	<level name="level3">
+		<startCode>
+		</startCode>
+		
+		<pathCode>
+		</pathCode>
+		
+		<endCode>
+		</endCode>
+	</level>
+	
+	<level name="level4">
+		<startCode>
+		</startCode>
+		
+		<pathCode>
+		</pathCode>
+		
+		<endCode>
+		</endCode>
+	</level>
+	
+	<level name="level5">
+		<startCode>
+		</startCode>
+		
+		<pathCode>
+		</pathCode>
+		
+		<endCode>
+		</endCode>
+	</level>
+	
+	
+
+</levels>

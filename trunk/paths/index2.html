@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dibujar con JQuery &amp; Canvas</title>
+    <link rel="stylesheet" type="text/css" href="EstiloT0404.css" />
+    <script src="jquery.js"></script>
+    <script language="JavaScript">
+        $(document).ready(function(){
+            var clic=false;
+            var xCoord,yCoord="";
+            var canvas=document.getElementById("can");
+            var cntx=canvas.getContext("2d");
+            cntx.strokeStyle="red";
+            cntx.lineWidth=10;
+            cntx.lineCap="round";
+            cntx.fillStyle="#fff";
+            cntx.fillRect(0,0,canvas.width,canvas.height);
+
+            $("#can").mousedown(function(canvas){
+                clic=true;
+                cntx.save();
+                xCoord=canvas.pageX-this.offsetLeft;
+                yCoord=canvas.pageY-this.offsetTop
+            });
+
+            $(document).mouseup(function(){
+                clic=false
+            });
+
+            $(document).click(function(){
+                clic=false
+            });
+
+            $("#can").mousemove(function(canvas){
+                if(clic==true){
+                    cntx.beginPath();
+                    cntx.moveTo(canvas.pageX-this.offsetLeft,canvas.pageY-this.offsetTop);
+                    cntx.lineTo(xCoord,yCoord);
+                    cntx.stroke();
+                    cntx.closePath();
+                    xCoord=canvas.pageX-this.offsetLeft;
+                    yCoord=canvas.pageY-this.offsetTop
+                }
+            });
+
+            $("#clr > div").click(function(){
+                cntx.strokeStyle=$(this).css("background-color");
+            });
+                        
+            $("#borrador").click(function(){
+                cntx.strokeStyle="#fff"
+            });
+            
+            
+            $("#limpiar").click(function(){
+                cntx.fillStyle="#fff";
+                cntx.fillRect(0,0,canvas.width, canvas.height);
+                cntx.strokeStyle="red";
+                cntx.fillStyle="red"
+            })
+        })
+    </script> 
+</head>
+<body>
+    <canvas id="can" width="500" height="300" ></canvas> 
+    <div id="clr"> 
+        <div style="background-color:black;"></div>
+        <div style="background-color:red;"></div>
+        <div style="background-color:green;"></div>
+        <div style="background-color:orange;"></div>
+        <div style="background-color:#FFFF00;"></div>
+        <div style="background-color:#F43059;"></div>
+        <div style="background-color:#ff00ff;"></div>
+        <div style="background-color:#9ecc3b;"></div>
+        <div style="background-color:#fbd;"></div>
+        <div style="background-color:#fff460;"></div>
+        <div style="background-color:#F43059;"></div>
+        <div style="background-color:#82B82C;"></div>
+        <div style="background-color:#0099FF;"></div>
+        <div style="background-color:#ff00ff;"></div>
+        <div style="background-color:rgb(128,0,255);"></div>
+        <div style="background-color:rgb(255,128,0);"></div>
+        <div style="background-color:rgb(153,254,0);"></div>
+        <div style="background-color:rgb(18,0,255);"></div>
+        <div style="background-color:rgb(255,28,0);"></div>
+        <div style="background-color:rgb(13,54,0);"></div> 
+    </div> 
+    <a id="limpiar" href="#">Limpiar</a> 
+    <a id="borrador" href="#">Borrador</a> 
+</body>
+</html>
